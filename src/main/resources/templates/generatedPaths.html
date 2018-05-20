@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:text="'Hello !'" />
+
+
+
+<table>
+    <tr th:each="rowList: ${paths}">
+        <td th:each="path: ${rowList}">
+            <svg width="500" height="900">
+                <path th:style="${path.getStyleElement().get().getString()}" th:d="${path.getFragmentsString()}"/>
+            </svg>
+        </td>
+    </tr>
+</table>
+
+<!--
+<h1 th:each="path : ${paths}">
+    <svg width="500" height="900">
+        <path th:style="${path.getStyleElement().get().getString()}" th:d="${path.getFragmentsString()}"/>
+    </svg>
+
+</h1>
+-->
+<!--
+<svg width="100" height="100">
+<circle cx="${circle.cx}" cy="${circle.cy}" r="${circle.r}" stroke="${circle.strke}"
+        stroke-width="${circle.stokeWidth}" fill="${circle.fill}" />
+</svg>
+
+-->
+
+</p>
+
+</body>
+</html>

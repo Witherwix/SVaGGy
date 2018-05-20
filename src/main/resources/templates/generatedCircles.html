@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:text="'Hello !'" />
+
+<!--
+<h1 th:each="circle : ${circles}">
+    <h2 th:text="${circle.cx}">cos</h2>
+    <svg width="100" height="100">
+        <circle th:cx="${circle.cx}" th:cy="${circle.cy}" th:r="${circle.r}" th:stroke="${circle.stroke}"
+                th:stroke-width="${circle.strokeWidth}" th:fill="${circle.fill}" />
+    </svg>
+
+</h1>
+-->
+
+<p th:utext="${text}"> Welcome to grocery store</p>
+
+    <!--
+<svg width="100" height="100">
+    <circle cx="${circle.cx}" cy="${circle.cy}" r="${circle.r}" stroke="${circle.strke}"
+            stroke-width="${circle.stokeWidth}" fill="${circle.fill}" />
+</svg>
+
+-->
+
+</p>
+
+</body>
+</html>

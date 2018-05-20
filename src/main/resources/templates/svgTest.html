@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:text="'Hello !'" />
+
+
+<table>
+    <tr th:each="svgString: ${svgStrings}">
+        <td>
+            <p th:utext="${svgString}"></p>
+        </td>
+    </tr>
+</table>
+
+
+</p>
+
+</body>
+</html>
