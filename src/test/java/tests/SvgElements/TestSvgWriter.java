@@ -31,7 +31,7 @@ public class TestSvgWriter {
         SvgParserWriter svgWriter = new SvgXmlParserWriter();
         SvgRoot svgRoot= svgWriter.parse(pathString);
 
-        assertEquals(svgRoot.getSvgString(), pathString);
+        assertEquals(pathString, svgRoot.getSvgString());
     }
 
     @Test
@@ -40,7 +40,7 @@ public class TestSvgWriter {
         SvgRoot svgRoot= svgWriter.parse(pathStyleString);
 
         //System.out.println(svgRoot.getSvgString());
-        assertEquals(svgRoot.getSvgString(), pathStyleString);
+        assertEquals(pathStyleString, svgRoot.getSvgString());
     }
 
     @Test
@@ -49,7 +49,7 @@ public class TestSvgWriter {
         String svgString = new String(Files.readAllBytes(Paths.get("src/test/resources/svgDefsLinGrad.xml")));
         SvgRoot svgRoot= svgWriter.parse(svgString);
 
-        assertEquals(svgRoot.getSvgString(), svgString);
+        assertEquals(svgString, svgRoot.getSvgString());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class TestSvgWriter {
         String svgString = new String(Files.readAllBytes(Paths.get("src/test/resources/groupEllipseStyle.xml")));
         SvgRoot svgRoot= svgWriter.parse(svgString);
 
-        assertEquals(svgRoot.getSvgString(), svgString);
+        assertEquals(svgString, svgRoot.getSvgString());
     }
 
     @Test
@@ -68,7 +68,7 @@ public class TestSvgWriter {
 
         SvgRoot svgRoot = svgWriter.parse(svgString);
 
-        assertEquals(svgRoot.getSvgString(), svgString);
+        assertEquals(svgString, svgRoot.getSvgString());
     }
 
     @Test
@@ -77,6 +77,6 @@ public class TestSvgWriter {
         String svgString = new String(Files.readAllBytes(Paths.get("src/test/resources/groupCircle.xml")));
         SvgRoot svgRoot = svgWriter.parse(svgString);
 
-        assertEquals(svgRoot.getSvgString(), svgString);
+        assertEquals(svgString, svgRoot.getSvgString());
     }
 }

@@ -1,5 +1,7 @@
 package com.michalso.svaggy.display.SvgElements.Bezier;
 
+import com.michalso.svaggy.display.SvgElements.Basic.Boundable;
+import com.michalso.svaggy.display.SvgElements.Basic.BoundingBox;
 import com.michalso.svaggy.display.SvgElements.Basic.StyleElement;
 import com.michalso.svaggy.display.SvgElements.Basic.SvgElement;
 import com.michalso.svaggy.display.SvgElements.Parser.SvgParserReader;
@@ -7,6 +9,7 @@ import com.michalso.svaggy.display.SvgElements.Parser.SvgXmlParserReader;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class BezierPath extends SvgElement {
+public class BezierPath extends SvgElement implements Boundable {
     private List<BezierFragment> fragments = new ArrayList<>();
     public BezierPath() {
 
@@ -38,6 +41,27 @@ public class BezierPath extends SvgElement {
         BezierParser parser = new BezierParser();
         BezierPath path =  parser.parse(string);
         return path;
+    }
+
+    @Override
+    public BoundingBox getBoundingBox() {
+        if (fragments.size() == 0) {
+            return null;
+        }
+
+        List<BoundingBox> boxes = new ArrayList<>();
+
+
+        Point2D lastPos = fragments.get(0).getPoints().get(0);
+        for (int i=1; i<fragments.size(); i++)
+        {
+            Optional<BoundingBox> box = fragments.get(i).getBoundingBox(lastPos);
+            System.out.println(lastPos);
+            if (box.isPresent()) {
+                boxes.add(box.get());
+            }
+        }
+        return BoundingBox.mergeBoundingBoxes(boxes);
     }
 
     //includes <path prefix
@@ -92,5 +116,4 @@ public class BezierPath extends SvgElement {
     public void setFragments(List<BezierFragment> fragments) {
         this.fragments = fragments;
     }
-
 }

@@ -24,9 +24,9 @@ public class TestSvgStyle {
         styleElement.setStrokeDashOffset(109);
         styleElement.setStrokeOpacity(1);
 
-        assertEquals(styleElement.getSvgStringWithoutTag(), "\"opacity:1;fill:url(#linearGradient5624);" +
+        assertEquals("\"opacity:1;fill:url(#linearGradient5624);" +
                 "fill-opacity:1;stroke:#000000;stroke-width:12.60000038;stroke-linecap:square;stroke-linejoin:miter;" +
-                "stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:109;stroke-opacity:1\"");
+                "stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:109;stroke-opacity:1\"", styleElement.getSvgStringWithoutTag());
 
     }
 
@@ -35,6 +35,6 @@ public class TestSvgStyle {
         StyleElement styleElement = new StyleElement();
         styleElement.setStrokeOpacity(10);
 
-        assertEquals(styleElement.getSvgStringWithoutTag(), "\"stroke-opacity:10\"");
+        assertEquals("\"stroke-opacity:10\"", styleElement.getSvgStringWithoutTag());
     }
 }

@@ -12,6 +12,6 @@ public class TestSvgCircle {
     public void testBasicCircle() {
         SvgCircle circle = new SvgCircle(10, 20, 60);
 
-        assertEquals(circle.getSvgString(), "<circle cx=\"10.0\" cy=\"20.0\" r=\"60.0\"/>");
+        assertEquals("<circle cx=\"10.0\" cy=\"20.0\" r=\"60.0\"/>", circle.getSvgString());
     }
 }

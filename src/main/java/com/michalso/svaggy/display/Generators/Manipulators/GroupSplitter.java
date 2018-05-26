@@ -1,5 +1,6 @@
 package com.michalso.svaggy.display.Generators.Manipulators;
 
+import com.michalso.svaggy.display.SvgElements.Basic.BoundingBox;
 import com.michalso.svaggy.display.SvgElements.Basic.SvgGroup;
 import com.michalso.svaggy.display.SvgElements.Basic.SvgRoot;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,10 @@ public class GroupSplitter {
                 root.setSvgDefinition(initSvg.getSvgDefinition().get());
             }
             root.addGroup(g);
+            BoundingBox box = g.getBoundingBox();
+            root.setWidth((int)box.getWidth());
+            root.setHeight((int)box.getHeight());
             roots.add(root);
-
         }
 
         return roots;

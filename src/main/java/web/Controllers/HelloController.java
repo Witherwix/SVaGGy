@@ -1,4 +1,4 @@
-package com.michalso.svaggy.display;
+package web.Controllers;
 
 import com.michalso.svaggy.display.Generators.Manipulators.BasicBezierFragmentManipulator;
 import com.michalso.svaggy.display.Generators.Manipulators.BasicStyleManipulator;

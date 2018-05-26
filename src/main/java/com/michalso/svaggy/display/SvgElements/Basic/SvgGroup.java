@@ -5,8 +5,9 @@ import com.michalso.svaggy.display.SvgElements.Parser.SvgXmlParserReader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class SvgGroup extends SvgElement {
+public class SvgGroup extends SvgElement implements Boundable {
 
 
     private List<SvgElement> elements = new ArrayList<>();
@@ -27,6 +28,12 @@ public class SvgGroup extends SvgElement {
         children.addAll(elements);
 
         return children;
+    }
+
+    @Override
+    public BoundingBox getBoundingBox() {
+        List<Boundable> boundables =  elements.stream().filter(e -> e instanceof Boundable).map(e -> (Boundable)e).collect(Collectors.toList());
+        return BoundingBox.mergeBoundingBoxes(boundables.stream().map(e -> e.getBoundingBox()).collect(Collectors.toList()));
     }
 
     @Override
@@ -52,4 +59,6 @@ public class SvgGroup extends SvgElement {
     public void setElements(List<SvgElement> elements) {
         this.elements = elements;
     }
+
+
 }

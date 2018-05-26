@@ -14,7 +14,7 @@ public class TestSvgDefinition {
     public void testEmptySvgDefinition() {
         SvgDefinition svgDef = new SvgDefinition();
 
-        assertEquals(svgDef.getSvgString(), "<defs/>");
+        assertEquals("<defs/>", svgDef.getSvgString());
     }
 
     @Test
@@ -22,6 +22,6 @@ public class TestSvgDefinition {
         SvgDefinition svgDef = new SvgDefinition();
         LinearGradient linearGradient = new LinearGradient(10.0, 20.0, 100.0, 200.0);
         svgDef.addElement(linearGradient);
-        assertEquals(svgDef.getSvgString(), "<defs>\n<linearGradient x1=\"10\" y1=\"20\" x2=\"100\" y2=\"200\"/>\n</defs>");
+        assertEquals("<defs>\n<linearGradient x1=\"10\" y1=\"20\" x2=\"100\" y2=\"200\"/>\n</defs>", svgDef.getSvgString());
     }
 }

@@ -13,14 +13,14 @@ public class TestUtils {
     public void testQuoteValueFloat() {
         String strQuote = SvgUtils.quoteValue(1.45);
 
-        assertEquals(strQuote, "\"1.45\"");
+        assertEquals("\"1.45\"", strQuote);
     }
 
     @Test
     public void testQuoteValueString() {
         String strQuote = SvgUtils.quoteValue("ala ma kota");
 
-        assertEquals(strQuote, "\"ala ma kota\"");
+        assertEquals("\"ala ma kota\"", strQuote);
     }
 
     @Test

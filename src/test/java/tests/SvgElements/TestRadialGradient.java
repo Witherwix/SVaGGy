@@ -16,6 +16,6 @@ public class TestRadialGradient {
         radGrad.setFx(20);
         radGrad.setFy(20);
 
-        assertEquals(radGrad.getSvgString(), "<RadialGradient cx=\"20%\" cy=\"20%\" r=\"50%\" fx=\"20%\" fy=\"20%\"/>");
+        assertEquals("<RadialGradient cx=\"20%\" cy=\"20%\" r=\"50%\" fx=\"20%\" fy=\"20%\"/>", radGrad.getSvgString());
     }
 }

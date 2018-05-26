@@ -14,6 +14,6 @@ public class TestSvgStopElement {
         stopElm.setStopColor("#AAAAAA");
         stopElm.setStopOpacity(10);
 
-        assertEquals(stopElm.getSvgString(), "<stop offset=\"10\" stop-color=\"#AAAAAA\" stop-opacity=\"10\"/>");
+        assertEquals("<stop offset=\"10\" stop-color=\"#AAAAAA\" stop-opacity=\"10\"/>", stopElm.getSvgString());
     }
 }

@@ -17,7 +17,7 @@ public class TestLinearGradient {
         linGrad.setX1(10.0);
         linGrad.setY2(30.0);
 
-        assertEquals(linGrad.getSvgString(), "<linearGradient x1=\"10\" y2=\"30\"/>");
+        assertEquals("<linearGradient x1=\"10\" y2=\"30\"/>", linGrad.getSvgString());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class TestLinearGradient {
         linGrad.addStopElement(stop1);
         linGrad.addStopElement(stop2);
 
-        assertEquals(linGrad.getSvgString(), "<linearGradient>\n<stop offset=\"1\" stop-color=\"#AAAAAA\"" +
-                " stop-opacity=\"100\"/>\n<stop offset=\"10\" stop-color=\"#AAAABB\" stop-opacity=\"80\"/>\n</linearGradient>");
+        assertEquals("<linearGradient>\n<stop offset=\"1\" stop-color=\"#AAAAAA\"" +
+                " stop-opacity=\"100\"/>\n<stop offset=\"10\" stop-color=\"#AAAABB\" stop-opacity=\"80\"/>\n</linearGradient>", linGrad.getSvgString());
     }
 }

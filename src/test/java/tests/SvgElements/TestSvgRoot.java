@@ -14,7 +14,7 @@ public class TestSvgRoot {
     @Test
     public void testGetSvgStringWidthHeight() {
         SvgRoot svgRoot = new SvgRoot(100, 200);
-        assertEquals(svgRoot.getSvgString(), "<svg width=\"100\" height=\"200\"/>" );
+        assertEquals("<svg width=\"100\" height=\"200\"/>", svgRoot.getSvgString());
     }
 
     @Test
@@ -22,7 +22,7 @@ public class TestSvgRoot {
         SvgRoot svgRoot = new SvgRoot(100, 200);
         SvgDefinition def = new SvgDefinition();
         svgRoot.setSvgDefinition(new SvgDefinition());
-        assertEquals(svgRoot.getSvgString(), "<svg width=\"100\" height=\"200\">\n<defs/>\n</svg>" );
+        assertEquals("<svg width=\"100\" height=\"200\">\n<defs/>\n</svg>", svgRoot.getSvgString());
     }
 
 

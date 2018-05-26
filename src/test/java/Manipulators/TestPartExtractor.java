@@ -27,7 +27,6 @@ public class TestPartExtractor {
         List<BezierPath> paths = extractor.getAllElements(BezierPath.class);
         List<SvgGroup> groups= extractor.getAllElements(SvgGroup.class);
 
-        System.out.println(group.getClass().equals(SvgGroup.class));
         assertEquals(2, groups.size());
         assertEquals(3, paths.size());
     }

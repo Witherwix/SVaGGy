@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Path modification</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Form</h1>
+    <form action="#" th:action="@{/genBezierPaths}" th:object="${generatedPathData}" enctype="multipart/form-data" method="post">
+        <p>From offset: <input type="text" th:field="*{fromOffset}"/> </p>
+        <p>To offset: <input type="text" th:field="*{toOffset}" min="-100" max="100" step="1"/> </p>
+        <p>Svg file: <input type="file" name="file"/> </p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+
+</body>
+</html>
