@@ -10,7 +10,7 @@ import java.util.Optional;
 public abstract class SvgElement {
     protected Optional<String> id = Optional.empty();
     protected Optional<StyleElement> styleElement = Optional.empty(); //todo move to otehr class?
-    protected Optional<String> transform = Optional.empty(); //todo cahnge to sepeerate class
+    protected Optional<SvgTransform> transform = Optional.empty();
     //protected Optional<String> rawInfo = Optional.empty();
 
     abstract public String getSvgString();
@@ -24,7 +24,7 @@ public abstract class SvgElement {
         }
 
         if (transform.isPresent()) {
-            parser.addElement("transform", transform.get());
+            parser.addElement("transform", transform.get().getSvgStringWithoutTag());
         }
 
         parser.addElement("style", styleElement);
@@ -69,11 +69,11 @@ public abstract class SvgElement {
         this.styleElement = Optional.of(style);
     }
 
-    public Optional<String> getTransform() {
+    public Optional<SvgTransform> getTransform() {
         return transform;
     }
 
-    public void setTransform(String transform) {
+    public void setTransform(SvgTransform transform) {
         this.transform = Optional.of(transform);
     }
 }

@@ -2,9 +2,10 @@ package com.michalso.svaggy.display.SvgElements.Basic;
 
 import com.michalso.svaggy.display.SvgElements.Parser.SvgXmlParserReader;
 
+import java.awt.geom.Point2D;
 import java.util.List;
 
-public class SvgEllipse extends SvgElement {
+public class SvgEllipse extends SvgElement implements Boundable {
 
     public SvgEllipse() {
 
@@ -16,6 +17,8 @@ public class SvgEllipse extends SvgElement {
         this.rx = rx;
         this.ry = ry;
     }
+
+
 
     @Override
     public String getSvgString() {
@@ -35,6 +38,16 @@ public class SvgEllipse extends SvgElement {
         return svgEllipse;
     }
 
+    @Override
+    public BoundingBox getBoundingBox() {
+        return new BoundingBox(cx - rx, cx + rx, cy - ry, cy + ry);
+    }
+
+    @Override
+    public void move(Point2D pos) {
+        cx += pos.getX();
+        cy +=pos.getY();
+    }
 
     private double cx;
     private double cy;
@@ -72,4 +85,5 @@ public class SvgEllipse extends SvgElement {
     public void setRy(double ry) {
         this.ry = ry;
     }
+
 }

@@ -39,31 +39,34 @@ public class BezierFragment {
 
     //todo move types to seperate classes
     public BoundingBox getBoundingBoxForC(Point2D prevPos) {
-
-        prevPos.clone();
         List<BoundingBox> boxes = new ArrayList<>();
+
         for(int i=0; i<points.size(); i+= 3) {
-            List<Double> xPoints = getAbsolutePointsRelativeToStartPos(prevPos).stream().map(e -> e.getX()).collect(Collectors.toList());
-            List<Double> yPoints = getAbsolutePointsRelativeToStartPos(prevPos).stream().map(e -> e.getY()).collect(Collectors.toList());
+            List<Double> xPoints = getAbsolutePointsRelativeToStartPos(prevPos, points.subList(i, i + 3)).stream().map(e -> e.getX()).collect(Collectors.toList());
+            List<Double> yPoints = getAbsolutePointsRelativeToStartPos(prevPos, points.subList(i, i + 3)).stream().map(e -> e.getY()).collect(Collectors.toList());
+
             xPoints.add(0, prevPos.getX());
             yPoints.add(0, prevPos.getY());
 
             Point2D minMaxX = getLhCoord(xPoints);
             Point2D minMaxY = getLhCoord(yPoints);
+            //convert minMaxY from local coordiante to svg coordinate
+            minMaxY.setLocation(2 * prevPos.getY() - minMaxY.getX(), 2 * prevPos.getY() - minMaxY.getY());
 
-            boxes.add(new BoundingBox(minMaxX.getX(), minMaxX.getY(), minMaxY.getX(), minMaxY.getY()));
-            prevPos.setLocation(prevPos.getX() + points.get(i + 2).getX(), prevPos.getY() + points.get(i + 2).getY());
+            Point2D lastPos = points.get(i + 2);
+            prevPos.setLocation(prevPos.getX() + lastPos.getX(), prevPos.getY() + lastPos.getY());
+            boxes.add(new BoundingBox(minMaxX.getX(), minMaxX.getY(), minMaxY.getY(), minMaxY.getX()));
         }
 
         return BoundingBox.mergeBoundingBoxes(boxes);
     }
 
     public BoundingBox getBoundingBoxForL(Point2D prevPos) {
-        List<Point2D> newPoints = getAbsolutePointsRelativeToStartPos(prevPos);
+        List<Point2D> newPoints = getAbsolutePointsRelativeToStartPosInSvgCoord(prevPos);
         BoundingBox box = new BoundingBox(Math.min(prevPos.getX(), newPoints.get(0).getX()), Math.max(prevPos.getX(), newPoints.get(0).getX()),
                 Math.min(prevPos.getY(), newPoints.get(0).getY()), Math.max(prevPos.getY(), newPoints.get(0).getY()));
 
-        prevPos.setLocation(prevPos.getX() + points.get(0).getX(), prevPos.getY() + points.get(0).getY());
+        prevPos.setLocation(newPoints.get(0));
 
         return box;
     }
@@ -74,8 +77,22 @@ public class BezierFragment {
      * @return
      */
     public List<Point2D> getAbsolutePointsRelativeToStartPos(Point2D startPos) {
-
         List<Point2D> newPoints= points.stream().map(e ->  { return new Point2D.Double(e.getX() + startPos.getX(), startPos.getY() - e.getY());
+        }).collect(Collectors.toList());
+
+        return newPoints;
+    }
+
+    public List<Point2D> getAbsolutePointsRelativeToStartPos(Point2D startPos, List<Point2D> locPoints) {
+        List<Point2D> newPoints= locPoints.stream().map(e ->  { return new Point2D.Double(e.getX() + startPos.getX(), startPos.getY() - e.getY());
+        }).collect(Collectors.toList());
+
+        return newPoints;
+    }
+
+    public List<Point2D> getAbsolutePointsRelativeToStartPosInSvgCoord(Point2D startPos) {
+
+        List<Point2D> newPoints= points.stream().map(e ->  { return new Point2D.Double(e.getX() + startPos.getX(), startPos.getY() + e.getY());
         }).collect(Collectors.toList());
 
         return newPoints;
@@ -192,6 +209,15 @@ public class BezierFragment {
             contrPoint1.setLocation(contrPoint1.getX() + offsetP1.getX(), contrPoint1.getY() + offsetP1.getY());
             contrPoint2.setLocation(contrPoint2.getX() + offsetP2.getX(), contrPoint2.getY() + offsetP2.getY());
         }
+    }
+
+    public void movePoint(int index, Point2D newPos) {
+        Point2D endPoint = new Point2D.Double(newPos.getX() + points.get(index).getX(), newPos.getY() + points.get(index).getY());
+        points.set(index, endPoint);
+    }
+
+    public void changePoint(int index, Point2D newPos) {
+        points.set(index, newPos);
     }
 
     public void addPoint(Point2D point) {

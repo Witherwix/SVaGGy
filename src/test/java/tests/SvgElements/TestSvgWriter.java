@@ -79,4 +79,14 @@ public class TestSvgWriter {
 
         assertEquals(svgString, svgRoot.getSvgString());
     }
+
+    @Test
+    public void testParseGroupTranslate() throws IOException, ParserConfigurationException, SAXException {
+        SvgParserWriter svgWriter = new SvgXmlParserWriter();
+        String svgString = new String(Files.readAllBytes(Paths.get("src/test/resources/groupTransform.xml")));
+        SvgRoot svgRoot = svgWriter.parse(svgString);
+
+        assertEquals(svgString, svgRoot.getSvgString());
+
+    }
 }

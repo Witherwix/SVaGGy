@@ -321,7 +321,7 @@ public class SvgXmlParserWriter implements SvgParserWriter {
                     svg.setStyleElement(parseStyle(nodeAttr.getNodeValue()));
                     break;
                 case "transform":
-                    svg.setTransform(nodeAttr.getNodeValue());
+                    svg.setTransform(parseTransform(nodeAttr.getNodeValue()));
                     break;
                 case "id":
                     svg.setId(nodeAttr.getNodeValue());
@@ -371,6 +371,28 @@ public class SvgXmlParserWriter implements SvgParserWriter {
         }
 
         return index;
+    }
+
+    private SvgTransform parseTransform(String inputString) {
+        SvgTransform svgTransform = new SvgTransform();
+        if (inputString.contains("matrix")) {
+
+            int beginIndex = inputString.indexOf("(") + 1;
+            int endIndex = inputString.indexOf(")");
+
+            String[] matrixValues = inputString.substring(beginIndex, endIndex).split(",");
+            svgTransform = new SvgTransform(Double.valueOf(matrixValues[0]), Double.valueOf(matrixValues[3]),
+                    Double.valueOf(matrixValues[4]), Double.valueOf(matrixValues[5]),
+                    Double.valueOf(matrixValues[1]), Double.valueOf(matrixValues[2]));
+            svgTransform.setMatrix(true);
+
+            return svgTransform;
+        }
+        else {
+            //todo
+        }
+
+        return svgTransform;
     }
 
     private StyleElement parseStyle(String inputString) {

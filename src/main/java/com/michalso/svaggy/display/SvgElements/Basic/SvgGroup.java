@@ -3,6 +3,7 @@ package com.michalso.svaggy.display.SvgElements.Basic;
 import com.michalso.svaggy.display.SvgElements.Parser.SvgParserReader;
 import com.michalso.svaggy.display.SvgElements.Parser.SvgXmlParserReader;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,8 +34,29 @@ public class SvgGroup extends SvgElement implements Boundable {
     @Override
     public BoundingBox getBoundingBox() {
         List<Boundable> boundables =  elements.stream().filter(e -> e instanceof Boundable).map(e -> (Boundable)e).collect(Collectors.toList());
-        return BoundingBox.mergeBoundingBoxes(boundables.stream().map(e -> e.getBoundingBox()).collect(Collectors.toList()));
+        BoundingBox box= BoundingBox.mergeBoundingBoxes(boundables.stream().map(e -> e.getBoundingBox()).collect(Collectors.toList()));
+
+        if (transform.isPresent()) {
+            return box.getScaledBox(transform.get().getScale());
+        } else {
+            return box;
+        }
     }
+
+    @Override
+    public void move(Point2D moveOffset) {
+        //move transform by appropriate pixel numbers, as during scaling local coordinate system changes
+        if (transform.isPresent()) {
+            //transform.get().move(moveOffset);
+            transform.get().clearTranslation();
+        }
+
+        for( SvgElement e :elements) {
+            System.out.println(e);
+        }
+        elements.stream().filter(e -> e instanceof Boundable).forEach(e -> ((Boundable)e).move(moveOffset));
+    }
+
 
     @Override
     public SvgGroup cloneObject() {

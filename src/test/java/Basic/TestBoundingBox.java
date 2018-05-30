@@ -17,9 +17,9 @@ public class TestBoundingBox {
         BoundingBox box3 = new BoundingBox(-80, 220, -120, 50);
 
         BoundingBox retBox = BoundingBox.mergeBoundingBoxes(box1, box2, box3);
-        assertEquals(new Point2D.Double(-200, -120), retBox.getLeftDownCorner());
-        assertEquals(new Point2D.Double(-200, 120), retBox.getLeftUpCorner());
-        assertEquals(new Point2D.Double(220, 120), retBox.getRightUpCorner());
-        assertEquals(new Point2D.Double(220, -120), retBox.getRightDownCorner());
+        assertEquals(new Point2D.Double(-200, 120), retBox.getLeftDownCorner());
+        assertEquals(new Point2D.Double(-200, -120), retBox.getLeftUpCorner());
+        assertEquals(new Point2D.Double(220, -120), retBox.getRightUpCorner());
+        assertEquals(new Point2D.Double(220, 120), retBox.getRightDownCorner());
     }
 }

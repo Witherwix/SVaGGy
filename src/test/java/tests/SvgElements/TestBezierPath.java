@@ -54,7 +54,7 @@ public class TestBezierPath {
     @Test
     public void testBoundingBoxSinglePath() throws IOException, ParserConfigurationException, SAXException {
         SvgParserWriter svgParserWriter= new SvgXmlParserWriter();
-        String string = new String(Files.readAllBytes(Paths.get("src/test/resources/wip.xml")));
+        String string = new String(Files.readAllBytes(Paths.get("src/test/resources/basicGroups.xml")));
         SvgRoot root = svgParserWriter.parse(string);
 
         List<SvgGroup> groups = root.getGroups();

@@ -52,7 +52,7 @@ public class BezierPath extends SvgElement implements Boundable {
         List<BoundingBox> boxes = new ArrayList<>();
 
 
-        Point2D lastPos = fragments.get(0).getPoints().get(0);
+        Point2D lastPos = (Point2D)fragments.get(0).getPoints().get(0).clone();
         for (int i=1; i<fragments.size(); i++)
         {
             Optional<BoundingBox> box = fragments.get(i).getBoundingBox(lastPos);
@@ -63,6 +63,16 @@ public class BezierPath extends SvgElement implements Boundable {
         }
         return BoundingBox.mergeBoundingBoxes(boxes);
     }
+
+    @Override
+    public void move(Point2D posOffset) {
+        if (fragments.size() > 0) {
+            if (fragments.get(0).getType().toUpperCase().equals("M")) {
+                fragments.get(0).movePoint(0, posOffset);
+            }
+        }
+    }
+
 
     //includes <path prefix
     @Override
@@ -103,6 +113,13 @@ public class BezierPath extends SvgElement implements Boundable {
                 getType().equals(type)).boxed().collect(Collectors.toList());
 
         return indexes;
+    }
+
+    @Override
+    public String toString() {
+
+        String retString = fragments.stream().map(Object::toString).collect(Collectors.joining(", "));
+        return retString;
     }
 
     public void addFragment(BezierFragment fragment) {
